@@ -15,8 +15,8 @@ export const metadata: Metadata = {
  */
 export default function Home() {
   return (
-    <main className={cn(styles.mainPage)}>
-      <Container>index page</Container>
-    </main>
+    <Container asChild>
+      <main className={cn(styles.mainPage)}>index page</main>
+    </Container>
   );
 }
