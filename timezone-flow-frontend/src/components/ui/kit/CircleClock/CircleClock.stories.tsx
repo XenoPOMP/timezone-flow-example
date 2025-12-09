@@ -18,8 +18,8 @@ export default meta;
 const builder = new StoryBuilder<typeof CircleClock>()
   .defineMeta(meta)
   .defineSharedProps({
-    hours: 9,
-    minutes: 30,
+    hours: 7,
+    minutes: 37,
     seconds: 45,
   });
 
