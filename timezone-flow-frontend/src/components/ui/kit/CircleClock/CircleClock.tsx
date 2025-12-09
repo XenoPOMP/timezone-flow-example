@@ -60,7 +60,7 @@ export const CircleClock: FC<CircleClockProps & CircleLabel> = ({
 
   return (
     <ZStack
-      className={cn('aspect-square w-full max-w-[200px]')}
+      className={cn('z-10 aspect-square w-full max-w-[200px]')}
       aria-hidden='false'
       aria-label={`${formattedTime}`}
     >
