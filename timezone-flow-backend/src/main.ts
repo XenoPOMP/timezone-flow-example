@@ -16,7 +16,7 @@ async function bootstrap() {
   // Middlewares
   app.use(cookieParser());
   app.enableCors({
-    origin: [process.env.APP_HOST],
+    origin: [process.env.TRUSTED_FRONTEND_URL],
     credentials: true,
     exposedHeaders: 'set-cookie',
   });
