@@ -1,9 +1,11 @@
 import cn from 'classnames';
 import Image from 'next/image';
-import type { FC } from 'react';
+import type { ComponentProps, FC } from 'react';
 import type { NumbersToN } from 'ts-number-range';
 
 import { ZStack } from '@/components/ui';
+
+import { DeepPartial } from '@test/assets';
 
 import hourArrowImage from '@public/clock-images/Hour arrow.png';
 import minuteArrowImage from '@public/clock-images/Minute arrow.png';
@@ -16,9 +18,13 @@ interface CircleClockProps {
   seconds: NumbersToN<60>;
 }
 
-const ARROW_IMAGE = {
+const ARROW_IMAGE: Pick<
+  ComponentProps<typeof Image>,
+  'width' | 'height' | 'className'
+> = {
   width: 300,
   height: 300,
+  className: cn('w-full h-full'),
 };
 
 // eslint-disable-next-line jsdoc/require-jsdoc
