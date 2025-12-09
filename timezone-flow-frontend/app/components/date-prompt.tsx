@@ -2,11 +2,13 @@
 
 import { useQuery } from '@tanstack/react-query';
 import cn from 'classnames';
-import { useCallback, useMemo } from 'react';
+import { Fragment, useCallback, useMemo } from 'react';
 
 import { dayjs } from '@/api';
 import { VStack } from '@/components/ui';
 import { DateUploadService } from '@/services';
+
+import styles from '../main-page.module.scss';
 
 import { PromptArticle as Article } from './index';
 
@@ -58,7 +60,7 @@ export function DatePrompt() {
             '[&_h2]:text-[2.0rem] [&_h2]:font-medium',
           )}
         >
-          <div>
+          <div className={cn('w-full')}>
             <Article title='Today'>
               <p suppressHydrationWarning>{formatted}</p>
             </Article>
@@ -69,6 +71,22 @@ export function DatePrompt() {
 
             <Article title='Parsed locally'>
               <p>{localParsed.format()}</p>
+            </Article>
+
+            <Article
+              title='Grid test'
+              className={cn('w-full')}
+            >
+              <div className={cn('grid gap-[1.6rem]', 'w-full', styles.grid)}>
+                {Array.from({ length: 4 }).map((_, idx) => (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <Fragment key={`grid-item-${idx}`}>
+                    <div
+                      className={cn('h-[150px] rounded-[1.2rem] bg-red-500')}
+                    ></div>
+                  </Fragment>
+                ))}
+              </div>
             </Article>
 
             <Article title='Upload status'>
