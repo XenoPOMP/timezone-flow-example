@@ -1,3 +1,4 @@
 @mixin automaticColumns($avgWidth) {
+  // auto-cols-[minmax(200px,2fr)]
   grid-template-columns: repeat(auto-fit, minmax($avgWidth, 1fr));
 }
