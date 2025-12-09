@@ -9,6 +9,7 @@ import { DeepPartial } from '@test/assets';
 
 import hourArrowImage from '@public/clock-images/Hour arrow.png';
 import minuteArrowImage from '@public/clock-images/Minute arrow.png';
+import pinImage from '@public/clock-images/Pin.png';
 import secondArrowImage from '@public/clock-images/Second arrow.png';
 import ciferblatImage from '@public/clock-images/ciferblat.png';
 
@@ -40,6 +41,24 @@ export const CircleClock: FC<CircleClockProps> = () => {
       <Image
         src={secondArrowImage}
         alt='Seconds` Arrow'
+        {...ARROW_IMAGE}
+      />
+
+      <Image
+        src={minuteArrowImage}
+        alt='Minutes` Arrow'
+        {...ARROW_IMAGE}
+      />
+
+      <Image
+        src={hourArrowImage}
+        alt='Hours` Arrow'
+        {...ARROW_IMAGE}
+      />
+
+      <Image
+        src={pinImage}
+        alt='Just a pin image'
         {...ARROW_IMAGE}
       />
     </ZStack>
