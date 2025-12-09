@@ -27,6 +27,8 @@ services:
       - DIRECT_DATABASE_URL=postgresql://${PGUSER}:${PGPASSWORD}@timezone-flow-frontend-compose-db:5432/${PGDATABASE}?schema=public&connect_timeout=300
       - JWT_SECRET=${JWT_SECRET}
       - APP_HOST=${APP_HOST}
+      - TRUSTED_FRONTEND_URL=${TRUSTED_FRONTEND_URL}
+      - ENV_MODE=dev
       - TZ=America/New_York
     networks:
       - default
