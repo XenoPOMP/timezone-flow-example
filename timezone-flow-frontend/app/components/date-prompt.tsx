@@ -2,15 +2,14 @@
 
 import { useQuery } from '@tanstack/react-query';
 import cn from 'classnames';
-import { Fragment, useCallback, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import { dayjs } from '@/api';
 import { VStack } from '@/components/ui';
+import type { CircleClockProps } from '@/components/ui/kit';
 import { DateUploadService } from '@/services';
 
-import styles from '../main-page.module.scss';
-
-import { PromptArticle as Article } from './index';
+import { PromptArticle as Article, CircleCard, CircleGrid } from './index';
 
 // eslint-disable-next-line jsdoc/require-jsdoc
 export function DatePrompt() {
@@ -29,16 +28,36 @@ export function DatePrompt() {
   }, [uploaded.data]);
 
   const prettyTime = useCallback(
-    (dateString: string, timezone: string | undefined = undefined): string => {
+    (
+      dateString: string,
+      timezone: string | undefined = undefined,
+    ): CircleClockProps => {
       // eslint-disable-next-line no-extra-boolean-cast
       const formatter = !!timezone
         ? dayjs(dateString).tz(timezone)
         : dayjs(dateString);
 
-      return formatter.format('HH:mm');
+      return {
+        hours: +formatter.format('H') as CircleClockProps['hours'],
+        minutes: +formatter.format('m') as CircleClockProps['minutes'],
+        seconds: +formatter.format('s') as CircleClockProps['seconds'],
+      };
     },
     [],
   );
+
+  // eslint-disable-next-line no-extra-boolean-cast
+  const prettyLocal = !!resultingDateString
+    ? prettyTime(resultingDateString)
+    : undefined;
+  // eslint-disable-next-line no-extra-boolean-cast
+  const prettyMoscow = !!resultingDateString
+    ? prettyTime(resultingDateString, 'Europe/Moscow')
+    : undefined;
+  // eslint-disable-next-line no-extra-boolean-cast
+  const prettyNY = !!resultingDateString
+    ? prettyTime(resultingDateString, 'America/New_York')
+    : undefined;
 
   return (
     <VStack
@@ -74,22 +93,9 @@ export function DatePrompt() {
             </Article>
 
             <Article
-              title='Grid test'
+              title='Upload status'
               className={cn('w-full')}
             >
-              <div className={cn('grid gap-[1.6rem]', 'w-full', styles.grid)}>
-                {Array.from({ length: 4 }).map((_, idx) => (
-                  // eslint-disable-next-line react/no-array-index-key
-                  <Fragment key={`grid-item-${idx}`}>
-                    <div
-                      className={cn('h-[150px] rounded-[1.2rem] bg-red-500')}
-                    ></div>
-                  </Fragment>
-                ))}
-              </div>
-            </Article>
-
-            <Article title='Upload status'>
               {uploaded.isLoading ? (
                 <p>… Loading</p>
               ) : (
@@ -104,23 +110,34 @@ export function DatePrompt() {
                         <>
                           <p>📆 Parsed: {resultingDateString}</p>
 
-                          <p>
-                            🕑 Time in your TZ:{' '}
-                            {prettyTime(resultingDateString)}
-                          </p>
-
-                          <p>
-                            🕑 Time in Moscow:{' '}
-                            {prettyTime(resultingDateString, 'Europe/Moscow')}
-                          </p>
-
-                          <p>
-                            🕑 Time in New York:{' '}
-                            {prettyTime(
-                              resultingDateString,
-                              'America/New_York',
+                          <CircleGrid>
+                            {!!prettyLocal && (
+                              <CircleCard
+                                title='Local'
+                                hours={prettyLocal.hours}
+                                minutes={prettyLocal.minutes}
+                                seconds={prettyLocal.seconds}
+                              />
                             )}
-                          </p>
+
+                            {!!prettyMoscow && (
+                              <CircleCard
+                                title='Moscow'
+                                hours={prettyMoscow.hours}
+                                minutes={prettyMoscow.minutes}
+                                seconds={prettyMoscow.seconds}
+                              />
+                            )}
+
+                            {!!prettyNY && (
+                              <CircleCard
+                                title='New York'
+                                hours={prettyNY.hours}
+                                minutes={prettyNY.minutes}
+                                seconds={prettyNY.seconds}
+                              />
+                            )}
+                          </CircleGrid>
                         </>
                       )}
                     </>
