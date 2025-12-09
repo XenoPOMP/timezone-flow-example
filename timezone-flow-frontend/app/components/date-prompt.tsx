@@ -9,6 +9,8 @@ import { PromptArticle } from './index';
 // eslint-disable-next-line jsdoc/require-jsdoc
 export function DatePrompt() {
   const today = useMemo(() => dayjs(new Date()), []);
+  const formatted = useMemo(() => today.format(), [today]);
+  const localParsed = useMemo(() => dayjs(formatted), [formatted]);
 
   return (
     <VStack
@@ -31,7 +33,11 @@ export function DatePrompt() {
           )}
         >
           <div>
-            <PromptArticle title='Today'>{today.format()}</PromptArticle>
+            <PromptArticle title='Today'>{formatted}</PromptArticle>
+            <PromptArticle title='Will upload'>{formatted}</PromptArticle>
+            <PromptArticle title='Parsed locally'>
+              {localParsed.format()}
+            </PromptArticle>
           </div>
         </VStack>
       </section>
