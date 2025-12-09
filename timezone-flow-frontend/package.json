@@ -53,6 +53,7 @@
     "axios": ">=1.13.2",
     "class-variance-authority": "^0.7.1",
     "classnames": "^2.5.1",
+    "dayjs": "1.11.19",
     "lucide-react": "^0.555.0",
     "motion": "^12.23.24",
     "next": "15.5.7",
