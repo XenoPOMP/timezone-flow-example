@@ -1,8 +1,10 @@
+import { useQuery } from '@tanstack/react-query';
 import cn from 'classnames';
 import { useMemo } from 'react';
 
 import { dayjs } from '@/api';
 import { VStack } from '@/components/ui';
+import { DateUploadService } from '@/services';
 
 import { PromptArticle } from './index';
 
@@ -11,6 +13,12 @@ export function DatePrompt() {
   const today = useMemo(() => dayjs(new Date()), []);
   const formatted = useMemo(() => today.format(), [today]);
   const localParsed = useMemo(() => dayjs(formatted), [formatted]);
+
+  const uploaded = useQuery({
+    queryKey: ['upload'],
+    // eslint-disable-next-line jsdoc/require-jsdoc
+    queryFn: () => DateUploadService.upload(formatted),
+  });
 
   return (
     <VStack

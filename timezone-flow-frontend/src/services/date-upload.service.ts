@@ -5,7 +5,8 @@ import type { AnyService } from '@/types';
 /**
  * Main service for uploading date string.
  */
-const DateUploadService = {
-  upload: () => axiosForApi.post('/upload', { dateString: '' }),
+export const DateUploadService = {
+  upload: (dateString: string) =>
+    axiosForApi.post<{ dateString: string }>('/upload', { dateString }),
 } satisfies AnyService;
 /* eslint-enable jsdoc/require-jsdoc */
