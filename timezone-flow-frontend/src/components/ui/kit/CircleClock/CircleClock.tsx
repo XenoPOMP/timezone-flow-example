@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import Image from 'next/image';
-import type { CSSProperties, ComponentProps, FC } from 'react';
+import type { ComponentProps, FC } from 'react';
+import { useCallback, useMemo } from 'react';
 import type { NumbersToN } from 'ts-number-range';
 
 import { ZStack } from '@/components/ui';
@@ -19,30 +20,64 @@ export interface CircleClockProps {
   seconds: NumbersToN<60>;
 }
 
+interface CircleLabel {
+  label?: (time: string) => string;
+}
+
 const ARROW_IMAGE: Pick<
   ComponentProps<typeof Image>,
-  'width' | 'height' | 'className'
+  'width' | 'height' | 'className' | 'aria-hidden'
 > = {
-  width: 300,
-  height: 300,
+  width: 835,
+  height: 835,
   className: cn('w-full h-full'),
+  'aria-hidden': 'true',
 };
 
 // eslint-disable-next-line jsdoc/require-jsdoc
-export const CircleClock: FC<CircleClockProps> = ({
+export const CircleClock: FC<CircleClockProps & CircleLabel> = ({
   hours,
   minutes,
   seconds,
+  label,
 }) => {
   const angles = useCircleClock({ hours, minutes, seconds });
 
+  const datePad = useCallback(
+    (payload: number): string => payload.toString().padStart(2, '0'),
+    [],
+  );
+  const formattedTime = useMemo((): string => {
+    const time = `${datePad(hours)}:${datePad(minutes)}:${datePad(seconds)}`;
+
+    // eslint-disable-next-line no-extra-boolean-cast
+    if (!!label) {
+      return label(time);
+    }
+
+    return `Time is ${time}`;
+  }, [datePad, hours, minutes, seconds, label]);
+
   return (
-    <ZStack className={cn('aspect-square w-full max-w-[300px]')}>
+    <ZStack
+      className={cn('aspect-square w-full max-w-[300px]')}
+      aria-hidden='false'
+      aria-label={`${formattedTime}`}
+    >
       <Image
         src={ciferblatImage}
         alt='Ciferblat image'
         {...ARROW_IMAGE}
       />
+
+      <div
+        {...ARROW_IMAGE}
+        style={{
+          backgroundColor: 'black',
+          zIndex: '-1',
+          borderRadius: '9999px',
+        }}
+      ></div>
 
       <Image
         src={secondArrowImage}

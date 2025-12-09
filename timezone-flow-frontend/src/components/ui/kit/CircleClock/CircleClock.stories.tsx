@@ -19,8 +19,8 @@ const builder = new StoryBuilder<typeof CircleClock>()
   .defineMeta(meta)
   .defineSharedProps({
     hours: 7,
-    minutes: 37,
-    seconds: 45,
+    minutes: 15,
+    seconds: 21,
   });
 
 export const Base = builder.buildStory({});
