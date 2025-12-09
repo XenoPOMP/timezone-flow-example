@@ -18,7 +18,7 @@ export function CircleCard({
     <div
       className={cn(
         'flex-center flex-col gap-[1.0rem] rounded-[1.2rem] p-[1.6rem]',
-        'bg-red-500',
+        'bg-slate-600',
       )}
     >
       <CircleClock
