@@ -20,10 +20,11 @@
     "resolveJsonModule": true,
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "esModuleInterop": true,
   },
   "include": [
     "./**/*.ts",
-    "./.dev/**/*.ts",
+    "./.dev/**/*.ts"
   ]
 }
