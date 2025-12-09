@@ -1,10 +1,8 @@
 import type { CreateAxiosDefaults } from 'axios';
 import axios from 'axios';
 
-import { env } from '@/utils/env';
-
 const apiDefaults: CreateAxiosDefaults = {
-  baseURL: env.NEXT_PUBLIC_API_URL,
+  baseURL: `${process.env.NEXT_PUBLIC_API_URL}`,
   headers: {
     'Content-Type': 'application/json',
     // 'Access-Control-Allow-Origin': '*',
