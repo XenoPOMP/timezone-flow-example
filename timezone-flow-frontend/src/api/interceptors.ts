@@ -4,7 +4,7 @@ import axios from 'axios';
 import { env } from '@/utils/env';
 
 const apiDefaults: CreateAxiosDefaults = {
-  baseURL: env.API_URL,
+  baseURL: env.NEXT_PUBLIC_API_URL,
   headers: {
     'Content-Type': 'application/json',
     // 'Access-Control-Allow-Origin': '*',
