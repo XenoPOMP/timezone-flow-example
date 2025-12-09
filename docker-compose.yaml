@@ -1,0 +1,8 @@
+include:
+  - path: ./timezone-flow-backend/docker-compose.yml
+services:
+  frontend:
+    build: ./timezone-flow-frontend
+    container_name: timezone-flow-frontend
+    ports:
+      - "3000:3000"

@@ -1,7 +1,7 @@
 services:
   db:
     image: postgres:15-alpine
-    container_name: nestjs-template-compose-db
+    container_name: timezone-flow-frontend-compose-db
     restart: always
     volumes:
       - db_data:/var/lib/postgresql/data
@@ -14,7 +14,7 @@ services:
 
   backend:
     build: .
-    container_name: nestjs-template-backend
+    container_name: timezone-flow-frontend-backend
     ports:
       - "4242:4242"
     depends_on:
@@ -23,8 +23,8 @@ services:
       - PGDATABASE=${PGDATABASE}
       - PGUSER=${PGUSER}
       - PGPASSWORD=${PGPASSWORD}
-      - DATABASE_URL=postgresql://${PGUSER}:${PGPASSWORD}@nestjs-template-compose-db:5432/${PGDATABASE}?schema=public&connect_timeout=300
-      - DIRECT_DATABASE_URL=postgresql://${PGUSER}:${PGPASSWORD}@nestjs-template-compose-db:5432/${PGDATABASE}?schema=public&connect_timeout=300
+      - DATABASE_URL=postgresql://${PGUSER}:${PGPASSWORD}@timezone-flow-frontend-compose-db:5432/${PGDATABASE}?schema=public&connect_timeout=300
+      - DIRECT_DATABASE_URL=postgresql://${PGUSER}:${PGPASSWORD}@timezone-flow-frontend-compose-db:5432/${PGDATABASE}?schema=public&connect_timeout=300
       - JWT_SECRET=${JWT_SECRET}
       - APP_HOST=${APP_HOST}
     networks:
