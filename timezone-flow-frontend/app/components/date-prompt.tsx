@@ -4,6 +4,8 @@ import { useMemo } from 'react';
 import { dayjs } from '@/api';
 import { VStack } from '@/components/ui';
 
+import { PromptArticle } from './index';
+
 // eslint-disable-next-line jsdoc/require-jsdoc
 export function DatePrompt() {
   const today = useMemo(() => dayjs(new Date()), []);
@@ -29,10 +31,7 @@ export function DatePrompt() {
           )}
         >
           <div>
-            <article>
-              <h2>Today</h2>
-              <p>{today.format()}</p>
-            </article>
+            <PromptArticle title='Today'>{today.format()}</PromptArticle>
           </div>
         </VStack>
       </section>
