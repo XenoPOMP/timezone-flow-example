@@ -43,9 +43,37 @@ export function DatePrompt() {
           )}
         >
           <div>
-            <Article title='Today'>{formatted}</Article>
-            <Article title='Will upload'>{formatted}</Article>
-            <Article title='Parsed locally'>{localParsed.format()}</Article>
+            <Article title='Today'>
+              <p>{formatted}</p>
+            </Article>
+
+            <Article title='Will upload'>
+              <p>{formatted}</p>
+            </Article>
+
+            <Article title='Parsed locally'>
+              <p>{localParsed.format()}</p>
+            </Article>
+
+            <Article title='Upload status'>
+              {uploaded.isLoading ? (
+                <p>… Loading</p>
+              ) : (
+                <>
+                  {uploaded.isError ? (
+                    <p>❌ Error occurred ({uploaded.error.message})</p>
+                  ) : (
+                    <>
+                      <p>✅ Successfully uploaded</p>
+
+                      {!!uploaded.data?.data.dateString && (
+                        <p>📆 {uploaded.data.data.dateString}</p>
+                      )}
+                    </>
+                  )}
+                </>
+              )}
+            </Article>
           </div>
         </VStack>
       </section>

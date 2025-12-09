@@ -9,7 +9,7 @@ export function PromptArticle({ title, children }: PromptArticleProps) {
   return (
     <article>
       <h2>{title}</h2>
-      <p suppressHydrationWarning>{children}</p>
+      {children}
     </article>
   );
 }
