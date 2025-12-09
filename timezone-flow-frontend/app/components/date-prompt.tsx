@@ -8,7 +8,7 @@ import { dayjs } from '@/api';
 import { VStack } from '@/components/ui';
 import { DateUploadService } from '@/services';
 
-import { PromptArticle } from './index';
+import { PromptArticle as Article } from './index';
 
 // eslint-disable-next-line jsdoc/require-jsdoc
 export function DatePrompt() {
@@ -43,11 +43,9 @@ export function DatePrompt() {
           )}
         >
           <div>
-            <PromptArticle title='Today'>{formatted}</PromptArticle>
-            <PromptArticle title='Will upload'>{formatted}</PromptArticle>
-            <PromptArticle title='Parsed locally'>
-              {localParsed.format()}
-            </PromptArticle>
+            <Article title='Today'>{formatted}</Article>
+            <Article title='Will upload'>{formatted}</Article>
+            <Article title='Parsed locally'>{localParsed.format()}</Article>
           </div>
         </VStack>
       </section>
