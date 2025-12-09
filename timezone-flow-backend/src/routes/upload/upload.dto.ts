@@ -1,7 +1,7 @@
-import { IsString } from 'class-validator';
+import { IsDayjsString } from '@/decorators/dayjs/is-dayjs-string-constraint';
 
 export class UploadDto {
-  @IsString()
+  @IsDayjsString()
   dateString: string;
 }
 
