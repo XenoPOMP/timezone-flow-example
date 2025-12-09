@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/nextjs';
 
 import { StoryBuilder } from '@/utils/storybook';
 
@@ -17,6 +17,10 @@ export default meta;
 
 const builder = new StoryBuilder<typeof CircleClock>()
   .defineMeta(meta)
-  .defineSharedProps({});
+  .defineSharedProps({
+    hours: 9,
+    minutes: 30,
+    seconds: 45,
+  });
 
 export const Base = builder.buildStory({});

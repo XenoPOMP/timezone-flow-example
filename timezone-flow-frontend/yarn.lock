@@ -12355,6 +12355,11 @@ ts-interface-checker@^0.1.9:
   resolved "https://registry.yarnpkg.com/ts-interface-checker/-/ts-interface-checker-0.1.13.tgz#784fd3d679722bc103b1b4b8030bcddb5db2a699"
   integrity sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==
 
+ts-number-range@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/ts-number-range/-/ts-number-range-1.0.4.tgz#9c5599c96e6a2bd4346660238f934ab40a984440"
+  integrity sha512-XgkudhnyergUJqu8j6ZVDhIauhgTPY15DtIzi3vPD+NeyQ4yL1oFiRIKur78NrVaqjjveyau9xY7XpTvaqIQbg==
+
 ts-pattern@^5.8.0:
   version "5.8.0"
   resolved "https://registry.yarnpkg.com/ts-pattern/-/ts-pattern-5.8.0.tgz#1bf2dcdc58ae96ac7b64e59c9515d7ce1bf0ff19"
