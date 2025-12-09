@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import cn from 'classnames';
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import { dayjs } from '@/api';
 import { VStack } from '@/components/ui';
@@ -21,6 +21,22 @@ export function DatePrompt() {
     // eslint-disable-next-line jsdoc/require-jsdoc
     queryFn: () => DateUploadService.upload(formatted),
   });
+
+  const resultingDateString = useMemo(() => {
+    return uploaded.data?.data.dateString;
+  }, [uploaded.data]);
+
+  const prettyTime = useCallback(
+    (dateString: string, timezone: string | undefined = undefined): string => {
+      // eslint-disable-next-line no-extra-boolean-cast
+      const formatter = !!timezone
+        ? dayjs(dateString).tz(timezone)
+        : dayjs(dateString);
+
+      return formatter.format('HH:mm');
+    },
+    [],
+  );
 
   return (
     <VStack
@@ -44,7 +60,7 @@ export function DatePrompt() {
         >
           <div>
             <Article title='Today'>
-              <p>{formatted}</p>
+              <p suppressHydrationWarning>{formatted}</p>
             </Article>
 
             <Article title='Will upload'>
@@ -66,8 +82,28 @@ export function DatePrompt() {
                     <>
                       <p>✅ Successfully uploaded</p>
 
-                      {!!uploaded.data?.data.dateString && (
-                        <p>📆 {uploaded.data.data.dateString}</p>
+                      {!!resultingDateString && (
+                        <>
+                          <p>📆 Parsed: {resultingDateString}</p>
+
+                          <p>
+                            🕑 Time in your TZ:{' '}
+                            {prettyTime(resultingDateString)}
+                          </p>
+
+                          <p>
+                            🕑 Time in Moscow:{' '}
+                            {prettyTime(resultingDateString, 'Europe/Moscow')}
+                          </p>
+
+                          <p>
+                            🕑 Time in New York:{' '}
+                            {prettyTime(
+                              resultingDateString,
+                              'America/New_York',
+                            )}
+                          </p>
+                        </>
                       )}
                     </>
                   )}
